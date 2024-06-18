@@ -1,0 +1,10 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/back/Dockerfile.dev
+    ports:
+      - 2345:2345
+      - 8080:8080
+    volumes:
+      - ./back:/app/back
