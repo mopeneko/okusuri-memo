@@ -18,18 +18,18 @@ import (
 func main() {
 	app := fiber.New()
 
+	serverAPI := options.ServerAPI(options.ServerAPIVersion1)
 	client, err := mongo.Connect(
 		context.Background(),
 		options.Client().
-			SetHosts([]string{os.Getenv("MONGO_SERVER") + ":27017"}).
-			SetAuth(options.Credential{
-				Username: os.Getenv("MONGO_INITDB_ROOT_USERNAME"),
-				Password: os.Getenv("MONGO_INITDB_ROOT_PASSWORD"),
-			}),
+			ApplyURI(os.Getenv("MONGODB_URI")).
+			SetServerAPIOptions(serverAPI),
 	)
 	if err != nil {
 		panic(fmt.Sprintf("failed to connect to MongoDB server: %+v", err))
 	}
+
+	defer client.Disconnect(context.Background())
 
 	db := client.Database(os.Getenv("MONGO_DATABASE"))
 	ctrl := controller.New(db)

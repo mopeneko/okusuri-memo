@@ -11,7 +11,6 @@ services:
     env_file:
       - .env
     environment:
-      - MONGO_SERVER=mongo
       - MONGO_DATABASE=okusuri_memo
 
   mongo:
