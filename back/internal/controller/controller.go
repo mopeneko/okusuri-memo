@@ -1,7 +1,16 @@
 package controller
 
-type Controller struct{}
+import (
+	"github.com/mopeneko/okusuri-memo/back/internal/service"
+	"go.mongodb.org/mongo-driver/mongo"
+)
 
-func New() *Controller {
-	return &Controller{}
+type Controller struct {
+	logService *service.Log
+}
+
+func New(db *mongo.Database) *Controller {
+	return &Controller{
+		logService: service.NewLog(db),
+	}
 }

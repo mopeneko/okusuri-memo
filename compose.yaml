@@ -10,6 +10,9 @@ services:
       - ./back:/app/back
     env_file:
       - .env
+    environment:
+      - MONGO_SERVER=mongo
+      - MONGO_DATABASE=okusuri_memo
 
   mongo:
     image: mongo:7.0
