@@ -7,7 +7,9 @@ import (
 	"os"
 
 	"github.com/gofiber/fiber/v3"
+	"github.com/gofiber/fiber/v3/middleware/adaptor"
 	"github.com/mopeneko/okusuri-memo/back/internal/controller"
+	"github.com/mopeneko/okusuri-memo/back/internal/middleware"
 	"github.com/mopeneko/okusuri-memo/back/internal/router"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -31,6 +33,8 @@ func main() {
 
 	db := client.Database(os.Getenv("MONGO_DATABASE"))
 	ctrl := controller.New(db)
+
+	app.Use(adaptor.HTTPMiddleware(middleware.NewAuth0()))
 
 	router.SetRoutes(app, ctrl)
 

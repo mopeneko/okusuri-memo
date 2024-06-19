@@ -15,3 +15,16 @@ type Meta struct {
 	DeletedAt *time.Time         `json:"deleted_at" bson:"deleted_at"`
 	DeletedBy *string            `json:"deleted_by" bson:"deleted_by"`
 }
+
+func NewMeta() Meta {
+	obj := Meta{}
+
+	obj.ID = primitive.NewObjectID()
+
+	now := time.Now()
+
+	obj.CreatedAt = now
+	obj.UpdatedAt = now
+
+	return obj
+}

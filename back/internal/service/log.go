@@ -34,3 +34,7 @@ func (s *Log) GetMulti(ctx context.Context, params GetMultiParams) ([]*model.Log
 		LastID:    params.LastID,
 	})
 }
+
+func (s *Log) Insert(ctx context.Context, obj *model.Log) error {
+	return s.repo.Insert(ctx, obj)
+}

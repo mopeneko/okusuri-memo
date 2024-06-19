@@ -8,8 +8,11 @@ require (
 	go.mongodb.org/mongo-driver v1.15.1
 )
 
+require gopkg.in/go-jose/go-jose.v2 v2.6.2 // indirect
+
 require (
 	github.com/andybalholm/brotli v1.1.0 // indirect
+	github.com/auth0/go-jwt-middleware/v2 v2.2.1
 	github.com/gofiber/utils/v2 v2.0.0-beta.4 // indirect
 	github.com/golang/snappy v0.0.1 // indirect
 	github.com/google/uuid v1.6.0 // indirect

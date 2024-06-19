@@ -81,3 +81,19 @@ func (repo *Log) Find(ctx context.Context, filter *filter.Log, p *pagination.Pag
 
 	return res, nil
 }
+
+func (repo *Log) Insert(ctx context.Context, obj *model.Log) error {
+	res, err := repo.collection.InsertOne(ctx, obj)
+	if err != nil {
+		return fmt.Errorf("failed to insert log: %w", err)
+	}
+
+	objectID, ok := (res.InsertedID).(primitive.ObjectID)
+	if !ok {
+		return fmt.Errorf("failed to cast to ObjectID: %w", err)
+	}
+
+	obj.ID = objectID
+
+	return nil
+}
