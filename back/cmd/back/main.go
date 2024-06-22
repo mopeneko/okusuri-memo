@@ -38,5 +38,10 @@ func main() {
 
 	router.SetRoutes(app, ctrl)
 
-	log.Fatal(app.Listen(":8080"))
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+
+	log.Fatal(app.Listen(fmt.Sprintf(":%s", port)))
 }
